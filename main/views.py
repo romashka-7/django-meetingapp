@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+
+def event_list(request):
+    event = get_object_or_404(Event)
+    options = event.
+    
