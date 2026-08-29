@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <h2>{{ event.title }}</h2>
+    <p>{{ event.description }}</p>
+
+    <h3>Варианты дат:</h3>
+    <ul>
+        {% for date in dates %}
+            <li>
+                {{ date.start_datetime }} - {{ date.end_datetime }}
+                (Голосов: {{ date.votes.count }})
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Проголосовать:</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить голос</button>
+    </form>
+{% endblock content %}

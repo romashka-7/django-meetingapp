@@ -1,5 +1,7 @@
 {% extends "main/base.html" %}
 
+{% load static %}
+
 {% block title %}Создать мероприятие{% endblock title %}
 
 {% block content %}
@@ -9,7 +11,7 @@
 
         {{ form.as_p }}
 
-        {{formset.management_form}}
+        {{formset.management_form}} {% comment "" %}скрытые поля, которые содержат информацию (общее количество форм, сколько заполнено и т.д.){% endcomment %}
         {% for date_form in formset.forms %}
             {{ date_form.as_p }}
         {% endfor %}

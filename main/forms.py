@@ -6,9 +6,23 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['title', 'description']
+
+class EventDateForm(forms.ModelForm):
+    class Meta:
+        model = EventDate
+        fields = ['start_datetime', 'end_datetime']
+        widgets = {
+            'start_datetime': forms.DateTimeInput(
+                attrs={'type': 'datetime-local'},
+                format='%Y-%m-%dT%H:%M'
+            ),
+            'end_datetime': forms.DateTimeInput(
+                attrs={'type': 'datetime-local'},
+                format='%Y-%m-%dT%H:%M'
+            ),
+        }
     
-    
-EventDateFormSet = inlineformset_factory(Event, EventDate, fields=('start_datetime', 'end_datetime'), extra=3, can_delete=True)
+EventDateFormSet = inlineformset_factory(Event, EventDate, form=EventDateForm, fields=('start_datetime', 'end_datetime'), extra=3, can_delete=True)
 
 class VoteForm(forms.Form):
     dates = forms.ModelMultipleChoiceField(
