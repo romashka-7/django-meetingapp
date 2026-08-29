@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+
+{% block title %}Создать мероприятие{% endblock title %}
+
+{% block content %}
+    <h1>Создать мероприятие</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        {{formset.management_form}}
+        {% for date_form in formset.forms %}
+            {{ date_form.as_p }}
+        {% endfor %}
+
+        <button type="submit">Создать</button>
+    </form>
+{% endblock content %}

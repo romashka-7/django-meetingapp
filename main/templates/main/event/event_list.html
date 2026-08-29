@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+
+
+{% block title %}Список всех созданных мероприятий{% endblock title %}
+
+{% block content %}
+    <h1>Мероприятия</h1>
+
+    <a href="{% url "main:event_create" %}">Создать мероприятие</a>
+
+    <div class="events">
+        {% for event in events %}
+        <div class="event">
+            <a href="{% url "main:event_detail" event.pk %}">
+                {{ event.title }}
+            </a>
+            <p>{{ event.description }}</p>
+            <small>Создано: {{ event.created_at }}</small>
+        </div>
+        {% empty %}
+        <p>Пока нет мероприятий</p>
+        {% endfor %}
+    </div>
+{% endblock content %}
